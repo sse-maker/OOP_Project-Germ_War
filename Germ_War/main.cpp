@@ -35,6 +35,20 @@ public:
     void Get_Area_and_Score();
     void Final_Score();
     
+    static void End_Game(Germ_War *game) {
+        char y_n;
+        cout << "Continue? (y/n) "; cin >> y_n;
+        if (y_n == 'y') {
+            delete game;
+            system("clear");
+        }
+        else if (y_n == 'n') {
+            delete game;
+            exit(1);
+        }
+        else End_Game(game);
+    }
+    
 private:
     int getch();
     int End_Condition(int);
@@ -47,14 +61,11 @@ private:
 };
 
 int main() {
-    char y_n;
-    while (y_n != 'n') {
+    while (true) {
         Germ_War *game = new Germ_War;
         game->Print_Screen();
         game->Cursor_Move();
-        cout << "Continue? (y/n) "; cin >> y_n;
-        if (y_n == 'y') system("clear");
-        delete game;
+        Germ_War::End_Game(game);
     }
 }
 
